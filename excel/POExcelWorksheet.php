@@ -134,7 +134,7 @@ class POExcelWorksheet extends POXMLFile implements POIXMLElement
 	 */
 	public function getWorkbook()
 	{
-		return $this->excel;
+		return $this->workbook;
 	}
 	
 	/**

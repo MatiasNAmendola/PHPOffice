@@ -42,7 +42,7 @@ class POExcelCell extends POComponent implements POIXMLElement
 		// type
 		$type = '';
 		if (is_string($this->value)) {
-			$type = ' t="inlineStr"';
+			$type = ' t="s"';
 		}
 		
 		$xml = '<c r="' . $this->name . $this->row->getName() . '"' . $type . '>';
@@ -51,7 +51,8 @@ class POExcelCell extends POComponent implements POIXMLElement
 		if (is_int($this->value)) {
 			$xml .= '<v>' . $this->value . '</v>';
 		} elseif (is_string($this->value)) {
-			$xml .= '<is><t>' . $this->value . '</t></is>';
+			$id = $this->row->getWorksheet()->getWorkbook()->getSharedStrings()->createString($this->value);
+			$xml .= '<v>' . $id . '</v>';
 		} else {
 			// @todo error
 		}

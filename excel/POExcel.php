@@ -47,22 +47,14 @@ class POExcel extends POComponent
 	{
 		$zip = new ZipArchive();
 		$zip->open($this->fileName, ZipArchive::CREATE);
-		
-		// content types
-		$contentTypes = new POExcelContentTypes($this);
-		$zip->addFromString('[Content_Types].xml', $contentTypes->getAsXMLFile());
-		
+				
 		// _rels
 		$zip->addEmptyDir('_rels');
 		$zip->addFromString('_rels/.rels', '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>');
 		
 		// xl
 		$zip->addEmptyDir('xl');
-		
-		// xl/_rels
-		$zip->addEmptyDir('xl/_rels');
-		$zip->addFromString('xl/_rels/workbook.xml.rels', $this->getWorkbook()->getRelationsXMLFile());
-		
+				
 		// xl/worksheets
 		$zip->addEmptyDir('xl/worksheets');
 		
@@ -71,6 +63,18 @@ class POExcel extends POComponent
 		}
 		
 		$zip->addFromString('xl/workbook.xml', $this->getWorkbook()->getAsXMLFile());
+		
+		if ($this->getWorkbook()->getSharedStrings()->getCount()) {
+			$zip->addFromString('xl/sharedStrings.xml', $this->getWorkbook()->getSharedStrings()->getAsXMLFile());
+		}
+		
+		// xl/_rels
+		$zip->addEmptyDir('xl/_rels');
+		$zip->addFromString('xl/_rels/workbook.xml.rels', $this->getWorkbook()->getRelationsXMLFile());
+		
+		// content types
+		$contentTypes = new POExcelContentTypes($this);
+		$zip->addFromString('[Content_Types].xml', $contentTypes->getAsXMLFile());
 		
 		$zip->close();
 	}

@@ -3,4 +3,5 @@
 	<Default Extension="xml" ContentType="application/xml"/>
 	<Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>
 	<?php echo $worksheets; ?>
+	<?php echo $sharedStrings; ?>
 </Types>

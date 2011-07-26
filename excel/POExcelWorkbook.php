@@ -12,6 +12,8 @@ class POExcelWorkbook extends POXMLFile
 	 */
 	private $worksheets = array();
 	
+	private $sharedStrings;
+	
 	/**
 	 * @see POXMLFile::getAsXMLFile()
 	 */
@@ -39,9 +41,29 @@ class POExcelWorkbook extends POXMLFile
 			$worksheets .= '<Relationship Id="rId' . $worksheet->getId() . '" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet' . $worksheet->getId() . '.xml"/>';
 		}
 		
+		// shared strings
+		$sharedStrings = '';
+		if ($this->getSharedStrings()->getCount()) {
+			$sharedStrings = '<Relationship Id="rId' . (count($this->worksheets) + 1) . '" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/sharedStrings" Target="sharedStrings.xml"/>';
+		}
+				
 		return $this->renderXMLTemplate('workbook_xml_rels', array(
-			'worksheets' => $worksheets
+			'worksheets' => $worksheets,
+			'sharedStrings' => $sharedStrings
 		));
+	}
+	
+	/**
+	 * Generate (if not exists) and return shared strings instance
+	 * 
+	 * @return POExcelSharedStrings shared strings instance
+	 */
+	public function getSharedStrings()
+	{
+		if ($this->sharedStrings === null) {
+			$this->sharedStrings = new POExcelSharedStrings();
+		}
+		return $this->sharedStrings;
 	}
 	
 	/**

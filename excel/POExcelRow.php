@@ -73,4 +73,14 @@ class POExcelRow extends POComponent implements POIXMLElement
 	{
 		return $this->name;
 	}
+	
+	/**
+	 * Return worksheet instance
+	 * 
+	 * @return POExcelWorksheet 
+	 */
+	public function getWorksheet()
+	{
+		return $this->worksheet;
+	}
 }

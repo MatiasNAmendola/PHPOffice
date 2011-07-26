@@ -33,8 +33,15 @@ class POExcelContentTypes extends POXMLFile
 			$worksheets .= '<Override PartName="/xl/worksheets/sheet' . $worksheet->getId() . '.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>';
 		}
 		
+		// shared strings
+		$sharedStrings = '';
+		if ($this->excel->getWorkbook()->getSharedStrings()->getCount()) {
+			$sharedStrings = '<Override PartName="/xl/sharedStrings.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sharedStrings+xml"/>';
+		}
+		
 		return $this->renderXMLTemplate('content_types', array(
-			'worksheets' => $worksheets
+			'worksheets' => $worksheets,
+			'sharedStrings' => $sharedStrings
 		));
 	}
 }

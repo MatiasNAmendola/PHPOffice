@@ -17,5 +17,6 @@ require_once(PO_BASEPATH . DIRECTORY_SEPARATOR . 'excel' . DIRECTORY_SEPARATOR .
 require_once(PO_BASEPATH . DIRECTORY_SEPARATOR . 'excel' . DIRECTORY_SEPARATOR . 'POExcelCell.php');
 require_once(PO_BASEPATH . DIRECTORY_SEPARATOR . 'excel' . DIRECTORY_SEPARATOR . 'POExcelContentTypes.php');
 require_once(PO_BASEPATH . DIRECTORY_SEPARATOR . 'excel' . DIRECTORY_SEPARATOR . 'POExcelRow.php');
+require_once(PO_BASEPATH . DIRECTORY_SEPARATOR . 'excel' . DIRECTORY_SEPARATOR . 'POExcelSharedStrings.php');
 require_once(PO_BASEPATH . DIRECTORY_SEPARATOR . 'excel' . DIRECTORY_SEPARATOR . 'POExcelWorkbook.php');
 require_once(PO_BASEPATH . DIRECTORY_SEPARATOR . 'excel' . DIRECTORY_SEPARATOR . 'POExcelWorksheet.php');
